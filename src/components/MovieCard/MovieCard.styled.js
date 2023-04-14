@@ -20,6 +20,6 @@ export const Overview = styled.h3`
   margin-top: 10px;
 `;
 
-export const Genre = styled.h3`
+export const Genres = styled.h3`
   margin-top: 10px;
 `;

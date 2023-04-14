@@ -2,8 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import MoviesDetails from '../pages/MoviesDetails';
 import Movies from '../pages/Movies';
-import { Cast } from './Cast';
-import { Reviews } from './Reviews';
+import Cast from './Cast/Cast';
+import { Reviews } from './Reviews/Reviews';
 import { SharedLayout } from './SharedLayout';
 
 const App = () => {

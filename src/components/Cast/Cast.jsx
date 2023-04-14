@@ -1,14 +1,14 @@
-import { Link, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovies } from 'services/pics-api';
 import { Loader } from 'components/Loader/Loader';
 import { MovieCard } from 'components/MovieCard/MovieCard';
-import { List, AddInformation } from './MoviesDetails.styled';
+import { ImHome3 } from 'react-icons/im';
+// import { List, AddInformation } from './Cast.styled';
 
-const MoviesDetails = () => {
+const Cast = () => {
   const { id } = useParams();
-  const CATEGORY = `movie/${id}`;
+  const CATEGORY = `movie/${id}/credits`;
   const searchQuery = '';
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,24 +42,11 @@ const MoviesDetails = () => {
   }, [CATEGORY]);
 
   return (
-    <main>
+    <div>
       {isLoading && <Loader />}
-      {data && <MovieCard data={data} />}
-      <AddInformation>
-        <h4>Additional information</h4>
-        <List>
-          <li>
-            <Link to="cast">Cast</Link>
-          </li>
-          <li>
-            <Link to="reviews">Review</Link>
-          </li>
-        </List>
-      </AddInformation>
-
-      <Outlet />
-    </main>
+      {data && <h3>This is CAST</h3>}
+    </div>
   );
 };
 
-export default MoviesDetails;
+export default Cast;
