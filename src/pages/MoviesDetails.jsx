@@ -21,7 +21,7 @@ const MoviesDetails = () => {
       try {
         const data = await fetchMovies(CATEGORY, searchQuery);
         setData(data);
-        console.log('data', data);
+        // console.log('data', data);
 
         // const { hits, totalHits } = await fetchMovies(searchQuery, page);
         // setMovieSet(prevMovieSet =>

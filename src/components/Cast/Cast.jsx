@@ -4,7 +4,8 @@ import { fetchMovies } from 'services/pics-api';
 import { Loader } from 'components/Loader/Loader';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import { ImHome3 } from 'react-icons/im';
-// import { List, AddInformation } from './Cast.styled';
+import { List, Image } from './Cast.styled';
+import noImage from 'images/noImage.png';
 
 const Cast = () => {
   const { id } = useParams();
@@ -19,15 +20,9 @@ const Cast = () => {
 
     const getMovies = async () => {
       try {
-        const data = await fetchMovies(CATEGORY, searchQuery);
-        setData(data);
-        console.log('data', data);
-
-        // const { hits, totalHits } = await fetchMovies(searchQuery, page);
-        // setMovieSet(prevMovieSet =>
-        //   page === 1 ? hits : [...prevPicsSet, ...hits]
-        // );
-        // setTotalHits(totalHits);
+        const { cast } = await fetchMovies(CATEGORY, searchQuery);
+        setData(cast);
+        console.log('data', cast);
         // if (hits.length === 0 && page === 1) {
         //   toast.info(`Sorry, no pics on query "${searchQuery}"`);
         // }
@@ -44,7 +39,24 @@ const Cast = () => {
   return (
     <div>
       {isLoading && <Loader />}
-      {data && <h3>This is CAST</h3>}
+      {data && (
+        <List>
+          {data.map(item => (
+            <li key={item.id}>
+              <Image
+                src={
+                  item.profile_path
+                    ? `https://image.tmdb.org/t/p/w500/${item.profile_path}`
+                    : noImage
+                }
+                alt={item.name}
+              />
+              <p>{item.name} </p>
+              <p>{`Character: ${item.character}`}</p>
+            </li>
+          ))}
+        </List>
+      )}
     </div>
   );
 };
