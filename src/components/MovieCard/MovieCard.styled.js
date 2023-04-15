@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const MovieCardWrapper = styled.div`
   display: flex;
+  margin-top: 10px;
   margin-bottom: 20px;
 `;
 

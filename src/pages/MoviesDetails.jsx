@@ -1,18 +1,24 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovies } from 'services/pics-api';
 import { Loader } from 'components/Loader/Loader';
 import { MovieCard } from 'components/MovieCard/MovieCard';
-import { List, AddInformation } from './MoviesDetails.styled';
+import { List, AddInformation, LinkBack, Link } from './MoviesDetails.styled';
+import { Error } from 'components/Error.styled';
+import { useLocation } from 'react-router-dom';
 
 const MoviesDetails = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState();
   const { id } = useParams();
+
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? `/movies`;
+
   const CATEGORY = `movie/${id}`;
   const searchQuery = '';
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [data, setData] = useState();
 
   useEffect(() => {
     setIsLoading(true);
@@ -21,19 +27,9 @@ const MoviesDetails = () => {
       try {
         const data = await fetchMovies(CATEGORY, searchQuery);
         setData(data);
-        // console.log('data', data);
-
-        // const { hits, totalHits } = await fetchMovies(searchQuery, page);
-        // setMovieSet(prevMovieSet =>
-        //   page === 1 ? hits : [...prevPicsSet, ...hits]
-        // );
-        // setTotalHits(totalHits);
-        // if (hits.length === 0 && page === 1) {
-        //   toast.info(`Sorry, no pics on query "${searchQuery}"`);
-        // }
       } catch (err) {
         console.log(err.message);
-        // setError('Oops, something went wrong...');
+        setError('Sorry, the resource you requested could not be found.');
       } finally {
         setIsLoading(false);
       }
@@ -44,19 +40,24 @@ const MoviesDetails = () => {
   return (
     <main>
       {isLoading && <Loader />}
+      <LinkBack to={backLinkHref}>Go back</LinkBack>
+      {error && <Error>{error}</Error>}
       {data && <MovieCard data={data} />}
       <AddInformation>
         <h4>Additional information</h4>
         <List>
           <li>
-            <Link to="cast">Cast</Link>
+            <Link to="cast" state={{ from: backLinkHref }}>
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to="reviews">Review</Link>
+            <Link to="reviews" state={{ from: backLinkHref }}>
+              Review
+            </Link>
           </li>
         </List>
       </AddInformation>
-
       <Outlet />
     </main>
   );

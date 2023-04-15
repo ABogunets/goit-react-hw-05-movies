@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   MovieCardWrapper,
   Image,
@@ -38,8 +38,6 @@ export const MovieCard = ({ data }) => {
   );
 };
 
-// ImageGalleryItem.propTypes = {
-//   webImage: PropTypes.string.isRequired,
-//   largeImage: PropTypes.string.isRequired,
-//   onClick: PropTypes.func,
-// };
+MovieCard.propTypes = {
+  data: PropTypes.object,
+};

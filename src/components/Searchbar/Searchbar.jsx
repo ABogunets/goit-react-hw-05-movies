@@ -24,15 +24,7 @@ export const Searchbar = ({ setSearchParams }) => {
   return (
     <SearchbarWrapper>
       <SearchForm onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="inputQuery"
-          // value={searchQuery}
-          autocomplete="off"
-          autoFocus
-          // placeholder="Search images and photos"
-          // onChange={handleChange}
-        />
+        <Input type="text" name="inputQuery" autocomplete="off" autoFocus />
         <SearchBtn type="submit">Search</SearchBtn>
       </SearchForm>
     </SearchbarWrapper>
@@ -40,5 +32,5 @@ export const Searchbar = ({ setSearchParams }) => {
 };
 
 Searchbar.propTypes = {
-  onSubmit: PropTypes.func,
+  setSearchParams: PropTypes.object,
 };

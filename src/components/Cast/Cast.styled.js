@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-
-// export const MovieCardWrapper = styled.div`
-//   display: flex;
-//   margin-bottom: 20px;
-// `;
+import { NavLink } from 'react-router-dom';
 
 export const Image = styled.img`
   width: 100px;
@@ -14,4 +10,11 @@ export const Image = styled.img`
 export const List = styled.ul`
   padding-left: 20px;
   font-size: 14px;
+`;
+export const LinkBack = styled(NavLink)`
+  padding: 5px 8px;
+  border-radius: 4px;
+  background-color: WhiteSmoke;
+  text-decoration: none;
+  color: orangered;
 `;

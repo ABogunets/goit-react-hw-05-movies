@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovies } from 'services/pics-api';
 import { Loader } from 'components/Loader/Loader';
-import { MovieCard } from 'components/MovieCard/MovieCard';
-import { ImHome3 } from 'react-icons/im';
 import { List, Title } from './Reviews.styled';
+import { Error } from 'components/Error.styled';
 
 const Reviews = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState([]);
   const { id } = useParams();
+
   const CATEGORY = `movie/${id}/reviews`;
   const searchQuery = '';
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [data, setData] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,12 +22,9 @@ const Reviews = () => {
         const { results } = await fetchMovies(CATEGORY, searchQuery);
         setData(results);
         console.log('results', results);
-        // if (hits.length === 0 && page === 1) {
-        //   toast.info(`Sorry, no pics on query "${searchQuery}"`);
-        // }
       } catch (err) {
         console.log(err.message);
-        // setError('Oops, something went wrong...');
+        setError('Sorry, the resource you requested could not be found.');
       } finally {
         setIsLoading(false);
       }
@@ -38,6 +35,7 @@ const Reviews = () => {
   return (
     <div>
       {isLoading && <Loader />}
+      {error && <Error>{error}</Error>}
       {data.length > 0 ? (
         <List>
           {data.map(item => (
