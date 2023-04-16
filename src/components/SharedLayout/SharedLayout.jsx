@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container, Header, Link } from './SharedLayout.styled';
 import { ToastContainer } from 'react-toastify';
@@ -14,7 +15,9 @@ export const SharedLayout = () => {
         </nav>
       </Header>
       <Container>
-        <Outlet />
+        <Suspense fallback={<div>Loading page...</div>}>
+          <Outlet />
+        </Suspense>
       </Container>
       <ToastContainer autoClose={3000} />
     </>
