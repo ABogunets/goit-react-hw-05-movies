@@ -21,7 +21,6 @@ const Reviews = () => {
       try {
         const { results } = await fetchMovies(CATEGORY, searchQuery);
         setData(results);
-        console.log('results', results);
       } catch (err) {
         console.log(err.message);
         setError('Sorry, the resource you requested could not be found.');

@@ -32,5 +32,5 @@ export const Searchbar = ({ setSearchParams }) => {
 };
 
 Searchbar.propTypes = {
-  setSearchParams: PropTypes.object,
+  setSearchParams: PropTypes.func,
 };
